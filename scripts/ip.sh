@@ -12,19 +12,19 @@ function get_ip_wlan() {
 }
 
 function get_ip_eth() {
-    ip="$(ifconfig | grep ether | awk '{print $2}')"
+    ip="$(ifconfig | grep ether | awk '{print $2}' | head  -n1)"
     if [[ $ip != *"."* ]]; then
         ip="not connected"
     fi
 }
 
 function print_ip() {
-    get_ip_wlan
+    get_ip_eth
     if [ ! -z "$ip" ]; then
         echo "$ip"
         exit
     else
-        get_ip_eth
+        get_ip_wlan
         if [ ! -z "$ip" ]; then
             echo $ip
         fi
