@@ -12,7 +12,7 @@ function get_ip_wlan() {
 }
 
 function get_ip_eth() {
-    ip="$(ifconfig | grep ether | awk '{print $2}' | head  -n1)"
+    ip="$(ifconfig | grep broadcast | awk '{print $2}' | head  -n1)"
     if [[ $ip != *"."* ]]; then
         ip="not connected"
     fi
